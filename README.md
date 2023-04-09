@@ -80,7 +80,7 @@ aws dynamodb update-table \
 aws dynamodb query \
     --table-name Discografia \
     --key-condition-expression "Artista = :artist" \
-    --expression-attribute-values  '{":artista":{"S":"Iron Maiden"}}'
+    --expression-attribute-values  '{":artista":{"S":"Prisma Brasil"}}'
 ```
 - Pesquisar item por artista e título da música
 
@@ -98,7 +98,7 @@ aws dynamodb query \
     --table-name Discografia \
     --index-name Titulo_do_Album-index \
     --key-condition-expression "Titulo_do_Album = :name" \
-    --expression-attribute-values  '{":name":{"S":"Fear of the Dark"}}'
+    --expression-attribute-values  '{":name":{"S":"Chamados por Cristo"}}'
 ```
 
 - Pesquisa pelo index secundário baseado no nome do artista e no título do álbum
@@ -108,7 +108,7 @@ aws dynamodb query \
     --table-name Discografia \
     --index-name ArtistAlbumTitle-index \
     --key-condition-expression "Artista = :v_artist and Titulo_do_Album = :v_title" \
-    --expression-attribute-values  '{":v_artist":{"S":"Iron Maiden"},":v_title":{"S":"Fear of the Dark"} }'
+    --expression-attribute-values  '{":v_artist":{"S":"Prisma Brasil"},":v_title":{"S":"Discípulo Teu"} }'
 ```
 
 - Pesquisa pelo index secundário baseado no título da música e no ano
@@ -118,5 +118,5 @@ aws dynamodb query \
     --table-name Discografia \
     --index-name SongTitleYear-index \
     --key-condition-expression "Titulo_da_Musica = :v_song and Lancamento = :v_year" \
-    --expression-attribute-values  '{":v_song":{"S":"Wasting Love"},":v_year":{"S":"1992"} }'
+    --expression-attribute-values  '{":v_song":{"S":"Asas da Alva"},":v_year":{"S":"1988"} }'
 ```
