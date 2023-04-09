@@ -1,5 +1,4 @@
-# dio-live-dynamodb
-Repositório para o live coding do dia 30/09/2021 sobre o Amazon DynamoDB
+# Módulo 'Boas Práticas com DynamoDB' do Bootcamp Banco PAN 2023
 
 ### Serviço utilizado
   - Amazon DynamoDB
@@ -12,13 +11,13 @@ Repositório para o live coding do dia 30/09/2021 sobre o Amazon DynamoDB
 
 ```
 aws dynamodb create-table \
-    --table-name Music \
+    --table-name Discografia \
     --attribute-definitions \
-        AttributeName=Artist,AttributeType=S \
-        AttributeName=SongTitle,AttributeType=S \
+        AttributeName=Artista,AttributeType=S \
+        AttributeName=Título_da_Música,AttributeType=S \
     --key-schema \
-        AttributeName=Artist,KeyType=HASH \
-        AttributeName=SongTitle,KeyType=RANGE \
+        AttributeName=Artista,KeyType=HASH \
+        AttributeName=Título_da_Música,KeyType=RANGE \
     --provisioned-throughput \
         ReadCapacityUnits=10,WriteCapacityUnits=5
 ```
@@ -27,7 +26,7 @@ aws dynamodb create-table \
 
 ```
 aws dynamodb put-item \
-    --table-name Music \
+    --table-name Discografia \
     --item file://itemmusic.json \
 ```
 
@@ -42,10 +41,10 @@ aws dynamodb batch-write-item \
 
 ```
 aws dynamodb update-table \
-    --table-name Music \
-    --attribute-definitions AttributeName=AlbumTitle,AttributeType=S \
+    --table-name Discografia \
+    --attribute-definitions AttributeName=Titulo_do_Album,AttributeType=S \
     --global-secondary-index-updates \
-        "[{\"Create\":{\"IndexName\": \"AlbumTitle-index\",\"KeySchema\":[{\"AttributeName\":\"AlbumTitle\",\"KeyType\":\"HASH\"}], \
+        "[{\"Create\":{\"IndexName\": \"Titulo_do_Album-index\",\"KeySchema\":[{\"AttributeName\":\"Titulo_do_Album\",\"KeyType\":\"HASH\"}], \
         \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
 ```
 
@@ -53,12 +52,12 @@ aws dynamodb update-table \
 
 ```
 aws dynamodb update-table \
-    --table-name Music \
+    --table-name Discografia \
     --attribute-definitions\
-        AttributeName=Artist,AttributeType=S \
-        AttributeName=AlbumTitle,AttributeType=S \
+        AttributeName=Artista,AttributeType=S \
+        AttributeName=Titulo_do_Album,AttributeType=S \
     --global-secondary-index-updates \
-        "[{\"Create\":{\"IndexName\": \"ArtistAlbumTitle-index\",\"KeySchema\":[{\"AttributeName\":\"Artist\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"AlbumTitle\",\"KeyType\":\"RANGE\"}], \
+        "[{\"Create\":{\"IndexName\": \"ArtistAlbumTitle-index\",\"KeySchema\":[{\"AttributeName\":\"Artista\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"Titulo_do_Album\",\"KeyType\":\"RANGE\"}], \
         \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
 ```
 
@@ -66,12 +65,12 @@ aws dynamodb update-table \
 
 ```
 aws dynamodb update-table \
-    --table-name Music \
+    --table-name Discografia \
     --attribute-definitions\
-        AttributeName=SongTitle,AttributeType=S \
-        AttributeName=SongYear,AttributeType=S \
+        AttributeName=Titulo_da_Musica,AttributeType=S \
+        AttributeName=Lancamento,AttributeType=S \
     --global-secondary-index-updates \
-        "[{\"Create\":{\"IndexName\": \"SongTitleYear-index\",\"KeySchema\":[{\"AttributeName\":\"SongTitle\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"SongYear\",\"KeyType\":\"RANGE\"}], \
+        "[{\"Create\":{\"IndexName\": \"SongTitleYear-index\",\"KeySchema\":[{\"AttributeName\":\"Titulo_da_Musica\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"Lancamento\",\"KeyType\":\"RANGE\"}], \
         \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
 ```
 
@@ -79,16 +78,16 @@ aws dynamodb update-table \
 
 ```
 aws dynamodb query \
-    --table-name Music \
-    --key-condition-expression "Artist = :artist" \
-    --expression-attribute-values  '{":artist":{"S":"Iron Maiden"}}'
+    --table-name Discografia \
+    --key-condition-expression "Artista = :artist" \
+    --expression-attribute-values  '{":artista":{"S":"Iron Maiden"}}'
 ```
 - Pesquisar item por artista e título da música
 
 ```
 aws dynamodb query \
-    --table-name Music \
-    --key-condition-expression "Artist = :artist and SongTitle = :title" \
+    --table-name Discografia \
+    --key-condition-expression "Artista = :artist and Titulo_da_Musica = :title" \
     --expression-attribute-values file://keyconditions.json
 ```
 
@@ -96,9 +95,9 @@ aws dynamodb query \
 
 ```
 aws dynamodb query \
-    --table-name Music \
-    --index-name AlbumTitle-index \
-    --key-condition-expression "AlbumTitle = :name" \
+    --table-name Discografia \
+    --index-name Titulo_do_Album-index \
+    --key-condition-expression "Titulo_do_Album = :name" \
     --expression-attribute-values  '{":name":{"S":"Fear of the Dark"}}'
 ```
 
@@ -106,9 +105,9 @@ aws dynamodb query \
 
 ```
 aws dynamodb query \
-    --table-name Music \
+    --table-name Discografia \
     --index-name ArtistAlbumTitle-index \
-    --key-condition-expression "Artist = :v_artist and AlbumTitle = :v_title" \
+    --key-condition-expression "Artista = :v_artist and Titulo_do_Album = :v_title" \
     --expression-attribute-values  '{":v_artist":{"S":"Iron Maiden"},":v_title":{"S":"Fear of the Dark"} }'
 ```
 
@@ -116,8 +115,8 @@ aws dynamodb query \
 
 ```
 aws dynamodb query \
-    --table-name Music \
+    --table-name Discografia \
     --index-name SongTitleYear-index \
-    --key-condition-expression "SongTitle = :v_song and SongYear = :v_year" \
+    --key-condition-expression "Titulo_da_Musica = :v_song and Lancamento = :v_year" \
     --expression-attribute-values  '{":v_song":{"S":"Wasting Love"},":v_year":{"S":"1992"} }'
 ```
