@@ -1,32 +1,32 @@
 {
-    "Music": [
+    "Discografia": [
         {
             "PutRequest": {
                 "Item": {
-                  "Artist": {"S": "Iron Maiden"},
-                  "SongTitle": {"S": "Wasting Love"},
-                  "AlbumTitle": {"S": "Fear of the Dark Live"},
-                  "SongYear": {"S": "1992"}
+                  "Artist": {"S": "Prisma Brasil"},
+                  "SongTitle": {"S": "Discípulo Teu"},
+                  "AlbumTitle": {"S": "Discípilo Teu"},
+                  "SongYear": {"S": "1988"}
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                  "Artist": {"S": "Iron Maiden"},
-                  "SongTitle": {"S": "Weekend Warrior"},
-                  "AlbumTitle": {"S": "Fear of the Dark"},
-                  "SongYear": {"S": "1992"}
+                  "Artist": {"S": "Prisma Brasil"},
+                  "SongTitle": {"S": "Asas da Alva"},
+                  "AlbumTitle": {"S": "Discípulo Teu"},
+                  "SongYear": {"S": "1988"}
                 }
             }
         },
         {
             "PutRequest": {
                 "Item": {
-                  "Artist": {"S": "Iron Maiden"},
-                  "SongTitle": {"S": "Fear of the Dark"},
-                  "AlbumTitle": {"S": "Fear of the Dark Tour"},
-                  "SongYear": {"S": "1992"}
+                  "Artist": {"S": "Prisma Brasil"},
+                  "SongTitle": {"S": "Chamados por Cristo"},
+                  "AlbumTitle": {"S": "Prisma Brasil - 25 anos Ao Vivo"},
+                  "SongYear": {"S": "2007"}
                 }
             }
         }
